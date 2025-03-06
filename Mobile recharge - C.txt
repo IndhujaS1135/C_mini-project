@@ -1,0 +1,152 @@
+#include <stdio.h>
+#include<string.h>
+#define max 6
+#include <unistd.h>  //lib used for sleep keyword
+
+struct plan {
+    int id;         
+    char price[30];  
+    char call[20];
+    char data[20];
+    char sms[20];
+    char val[20];
+}j[max],a[max],v[max];
+
+void main() 
+{
+    int s, p, pl;
+    long int c, n;
+    char i[30];         //to get UPI ID
+    
+    printf("\t\t\tWelcome to Mobile Recharge\n\n");
+    
+    //To select the SIM type
+    printf("Available SIM types :\n1) Airtel\n2) Jio\n3) Vodafone\n");
+    printf("Select your SIM type : ");
+    scanf("%d", &s);
+    
+    //assigning values for aritel
+    struct plan a[max] = {
+        {1, "₹179", "Unlimited", "2GB", "300 SMS", "28 days"},
+        {2, "₹265", "Unlimited", "1GB/day", "300 SMS/day", "28 days"},
+        {3, "₹299", "Unlimited", "1.5GB/day", "100 SMS/day", "28 days"},
+        {4, "₹359", "Unlimited", "2GB/day", "100 SMS/day", "28 days"},
+        {5, "₹455", "Unlimited", "6GB", "100 SMS/day", "84 days"},
+        {6, "₹2999", "Unlimited", "2GB/day", "100 SMS/day", "365 days"}
+   };
+   
+    //assigning values for jio
+    struct plan j[max] = {
+        {1, "₹155", "Unlimited", "2GB/month", "300 SMS", "28 days"},
+        {2, "₹239", "Unlimited", "1.5GB/day", "100 SMS/day", "28 days"},
+        {3, "₹299", "Unlimited", "2GB/day  ", "100 SMS/day", "28 days"},
+        {4, "₹396", "Unlimited", "6GB", "1000 SMS", "84 days"},
+        {5, "₹479", "Unlimited", "1.5GB/day", "100 SMS/day", "56 days"},
+        {6, "₹2879", "Unlimited", "2GB/day", "100 SMS/day", "365 days"}
+   };
+
+    //assigning values for VI
+    struct plan v[max] = {
+        {1, "₹199", "Unlimited", "3GB/day", "300 SMS", "28 days"},
+        {2, "₹299", "Unlimited", "1GB/day", "100 SMS/day", "28 days"},
+        {3, "₹349", "Unlimited", "1.5GB/day", "100 SMS/day", "28 days"},
+        {4, "₹365", "Unlimited", "2GB/day", "100 SMS/day", "28 days"},
+        {5, "₹719", "Unlimited", "1GB/day", "100 SMS/day", "72 days"},
+        {6, "₹3699", "Unlimited", "2GB/day +50GB", "100 SMS/day", "365 days"}
+   };
+   
+   printf("\nAvailable Recharge plans  \n");
+    //for the table alignment
+   printf("%-5s %-10s %-15s %-15s %-15s %-10s\n", "ID", "Price", "Calls", "Data", "SMS", "Validity");  
+   printf("-------------------------------------------------------------------------\n");
+   //to display the values
+   if(s==1)
+   {
+    for(int i=0;i<max;i++)
+    printf("%-5d %-10s %-15s %-15s %-15s %-15s\n",
+               a[i].id, a[i].price, a[i].call, a[i].data, a[i].sms, a[i].val);
+   }         
+   else if(s==2)
+   {
+    for(int i=0;i<max;i++)
+    printf("%-5d %-10s %-15s %-15s %-15s %-15s\n",
+               j[i].id, j[i].price, j[i].call, j[i].data, j[i].sms, j[i].val);
+    }
+    else if(s==3)
+    {
+    for(int i=0;i<max;i++)
+    printf("%-5d %-10s %-15s %-15s %-15s %-15s\n",
+               v[i].id, v[i].price, v[i].call, v[i].data, v[i].sms, v[i].val);
+    }
+    else
+    printf("Oops!..Invalid SIM");
+    
+    
+    //To select Recharge plan 
+    printf("\nSelect your plan : ");
+    scanf("%d", &pl);
+    if(pl>0 && pl<=6)
+    {
+     //Way of payment
+    printf("\nPlease select your online payment method: \n1. Credit/Debit card\n2. UPI\n3. Google Pay\n4. PhonePe\n\n");
+    printf("Enter the number corresponding to your payment method: ");
+    scanf("%d", &p);
+    
+    
+    switch(p) {
+        case 1:
+            printf("\nYou selected Credit/Debit Card.\n");
+            printf("Please enter your card number: ");
+            scanf("%ld", &c);
+            printf("\nProcessing your payment with Credit/Debit Card...\n");
+            break;
+        case 2:
+            printf("\nYou selected UPI.\n");
+            printf("Please enter your UPI ID: ");
+            scanf("%s", i);
+            printf("\nProcessing your payment with UPI ID: %s...\n", i);
+            break;
+        case 3:
+            printf("\nYou selected Google Pay.\n");
+            printf("Please enter your Google Pay linked phone number: ");
+            scanf("%ld", &n);
+            printf("\nProcessing payment through Google Pay...\n");
+            break;
+        case 4:
+            printf("\nYou selected PhonePe.\n");
+            printf("Please enter your PhonePe linked phone number: ");
+            scanf("%ld", &n);
+            printf("\nProcessing payment through PhonePe...\n");
+            break;
+        default:
+            printf("\nOops! Invalid payment method...\n");
+           
+    }
+      //sleep keyword 
+    sleep(1);
+    
+    printf("\nThank you for recharging! Your recharge is successful. \n\n\n");
+    printf("\n***********************************\n");
+     //To generate the Rechagre Bill
+     printf("-----Recharge Bill-----\n\n");
+     if(s==1)
+     {
+         printf("Price\t\t:%s\nCall\t\t:%s\nData\t\t:%s\nSMS\t\t:%s\nValidit\t\t:%s\nPayment Status  :%s\n",
+               a[pl-1].price, a[pl-1].call, a[pl-1].data, a[pl-1].sms, a[pl-1].val,"Confirmed");
+     }
+      else if(s==2)
+     {
+       printf("Price\t\t:%s\nCall\t\t:%s\nData\t\t:%s\nSMS\t\t:%s\nValidit\t\t:%s\nPayment Status  :%s\n",
+               j[pl-1].price, j[pl-1].call, j[pl-1].data, j[pl-1].sms, j[pl-1].val,"Confirmed");
+     }
+     else if(s==3)
+     {
+       printf("Price\t\t:%s\nCall\t\t:%s\nData\t\t:%s\nSMS\t\t:%s\nValidit\t\t:%s\nPayment Status  :%s\n",
+               v[pl-1].price, v[pl-1].call, v[pl-1].data, v[pl-1].sms, v[pl-1].val,"Confirmed");
+     }
+     
+     printf("\n***********************************\n");
+    }
+    else
+     printf("Invalid Plan..");
+}
