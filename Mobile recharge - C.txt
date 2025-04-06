@@ -144,7 +144,6 @@ void main()
        printf("Price\t\t:%s\nCall\t\t:%s\nData\t\t:%s\nSMS\t\t:%s\nValidit\t\t:%s\nPayment Status  :%s\n",
                v[pl-1].price, v[pl-1].call, v[pl-1].data, v[pl-1].sms, v[pl-1].val,"Confirmed");
      }
-     
      printf("\n***********************************\n");
     }
     else
